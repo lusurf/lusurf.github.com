@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[涛声依旧]]></title>
   <link href="http://lusurf.github.com/atom.xml" rel="self"/>
   <link href="http://lusurf.github.com/"/>
-  <updated>2012-07-07T21:26:16+08:00</updated>
+  <updated>2012-07-08T00:39:31+08:00</updated>
   <id>http://lusurf.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
-    
+    <name><![CDATA[海涛涛]]></name>
+    <email><![CDATA[lusurf@foxmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
