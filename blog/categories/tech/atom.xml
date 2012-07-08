@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tech | 涛声依旧]]></title>
+  <link href="http://lusurf.github.com/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://lusurf.github.com/"/>
+  <updated>2012-07-08T17:34:20+08:00</updated>
+  <id>http://lusurf.github.com/</id>
+  <author>
+    <name><![CDATA[海涛涛]]></name>
+    <email><![CDATA[lusurf@foxmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tornado 到底是个啥？]]></title>
+    <link href="http://lusurf.github.com/blog/2012/07/08/what-is-tornado/"/>
+    <updated>2012-07-08T16:05:00+08:00</updated>
+    <id>http://lusurf.github.com/blog/2012/07/08/what-is-tornado</id>
+    <content type="html"><![CDATA[<p>Tornado是一个Python开发的web服务器（框架），其本身的性能和扩展性都非常好。Tornado非常健壮和稳定，可以处理很大的web流量。但是，无论从设置还是开发角度来看，Tornado都是非常轻量级的框架，它可以用来开发大量不同的程序和工具。</p>
+<!-- more -->
+<p>我们现在所熟知的Tornado的前身是FriendFeed公司的一个web服务框架。这个框架是Bret Taylor和他的同事开发的。后来Facebook收购了FriendFeed公司，并将Tornado开源。Tornado可以奇松处理10000个并发链接，这是它与传统web服务器最大的不同。Tornado在设计之处就充分考虑到性能问题，设计Tornado的目的就是要解决著名的C10K问题。所以说，从设计角度来看，Tornado就是一个性能非常好的框架。Tornado同样打包了好多工具来处理一些开发中遇到的繁杂的问题，这些工具包括安全和用户认证、社交网络、外部服务的异步访问（包括数据库和web API等）。</p>
+
+<p><blockquote><p><h3>C10问题的一些细节</h3> 诸如Apache之类的以进程为基础的web服务器会为传入链接维护一个系统进程池。Apache从进程池中选择一个进程来处理每一个HTTP连接。如果所有现存的进程都处于工作状态而系统内存又充足的话，Apache会建立新的进程。大部分Linux的发行版默认为每一个进程分配8兆字节的栈空间，当然了，不同的系统可能不一样，但也是大同小异。我们无法预测Apache这种架构的可扩展性会在合适超载。而且为每一个打开而等待数据的连接维护一个进程会很容易的将系统的可用内存耗光。</p></p><p><p>大多数的社交web应用会实时地现实消息的更新、状态的更改和用户的通知。这些实时操作要求客户端建立一个长连接来等待来自服务端的任何相应。这些HTTP长连接的数量可以迅速地达到Apache进程池的上限。进程池的工作进程被耗光以后，这台服务器就无力相应新的请求。</p></p><p><p>对于这种应用场景来讲，异步服务器是相对比较新颖的。但是，人们设计异步服务器的目的就是要突破基于进程的服务器的种种限制。当负载加大的时候，诸如Node.js、lighttpd和Tornado之类的服务器可以使用并发多任务来很优雅地扩展自己的服务能力。也就是说，当前请求在等待外部数据源（例如一次数据库查询或者HTTP请求）的数据的时候，异步服务器会立即暂停当前请求的控制。异步服务器回复暂停操作的常见模式则是在合适的数据准备好以后出发一个回调方法。我们会在第5章讨论Tornado的回调模式和一系列的异步特性。</p></p><p><p></p></blockquote></p>
+
+<p>从2009年9月10号发福至今，Tornado获得了大量的社区支持。于此同时，人们不断地调整Tornado以使用不同的开发目的。除了FriendFeed和Facebook公司之外，包括Quora、Turntable.fm、Bit.ly、Hipmunk和MyYearbook在内的众多公司将自己的生产环境转向Tornado。简单来讲，如果你正在为你的复杂的CMS系统或者僵化的开发框架寻找替代品的话，Tornado可能不是你想要的。Tornado并不要求你使用特定方法配置众多的模型，也不要求你使用统一的风格处理表单或者其他诸如此类的事情。Tornado能做的只是让你更快更容易得开发超级快速的web应用。如果你想开发可扩展的社交应用、实时的分析引擎或者给予REST的API接口，而起要充分利用Python语言的简单和易用性的话，那么Tornado（和本书）就是为你而准备的！ <h2>Tornado 起步</h2> 在类unix系统安装Tornado那是相当的方便。你可以用PyPI（使用easy_install或者pip安装），或者从Github上下载源码然后使用以下命令编译安装： <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> <span class="nv">$ </span>curl -L -O http://github.com/downloads/facebook/tornado/tornado-2.1.1.tar.gz <span class="nv">$ </span>tar xvzf tornado-2.1.1.tar.gz <span class="nv">$ </span><span class="nb">cd </span>tornado-2.1.1 <span class="nv">$ </span>python setup.py build <span class="nv">$ </span>sudo python setup.py install
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>当然了，作为ArchLinux用户，我总能在ArchLinux的官方软件仓库里找到最新版的Tornado，安装和卸载都可以用pacman完成： <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> lusurf@htc ~ <span class="nv">$ </span>pacman -Ss tornado community/python-tornado 2.2.1-1 <span class="c"># 这是适用python3的Tornado open source version of the scalable, non-blocking web server and tools community/python2-tornado 2.2.1-1 # 适用python2的Tornado open source version of the scalable, non-blocking web server and tools lusurf@htc ~ $ pacman -S python-tornado 2.2.1-1 </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Tornado安装完成后，我们的准备工作就做好了。Tornado包中附带了一系列的示例程序。这些示例包括搭建一个博客、整合Facebook、运行一个聊天服务器，巴拉巴拉。在本书接下来的章节中，我们会逐一介绍几个个示例应用。到后面记住参考一下这里的示例应用就好了。</p>
+<h2>Tornado 社区和支持</h2>
+<p>对于问题、示例和一般的入门教程，Tornado的官方文档是一个很不错的出发点。在tornadoweb.org网站有丰富的示例和特性的详细说明。Facebook在Github上创建了Tornado的仓库。Tornado的具体规范和改动都可以从上面获取。队伍更加具体的问题，你可以在Tornado Web Server的Google论坛提问，在这个论坛里活动的都是在日常工作中使用Tornao的牛仔们。</p>]]></content>
+  </entry>
+  
+</feed>
